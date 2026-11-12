@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Cyperio: only in the APK we distribute ourselves (not in the Google Play build "gplay"):
+     the app updates itself from the panel, and the purchase page opens inside the app. -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+
+    <application>
+        <activity
+            android:name="com.v2ray.ang.ui.BuyActivity"
+            android:exported="false"
+            android:label="@string/cyperio_menu_buy" />
+    </application>
+</manifest>
