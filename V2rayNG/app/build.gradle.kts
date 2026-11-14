@@ -69,6 +69,9 @@ android {
             dimension = "distribution"
             buildConfigField("String", "DISTRIBUTION", "\"Google Play\"")
             buildConfigField("boolean", "STORE_BUILD", "true")
+            // Play needs a new versionCode for every upload; the APK keeps defaultConfig's.
+            // 761: QUERY_ALL_PACKAGES removed (src/gplay/AndroidManifest.xml)
+            versionCode = 761
         }
     }
 

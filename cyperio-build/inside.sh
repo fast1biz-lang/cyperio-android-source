@@ -55,7 +55,7 @@ if [ -n "${PLAY:-}" ]; then
   # the Play build must not be able to update itself or sell: fail if the merged manifest still says so
   M=$(find app/build/intermediates -path '*gplayRelease*' -name AndroidManifest.xml | head -1)
   [ -n "$M" ] || { echo "merged manifest not found"; exit 1; }
-  if grep -q 'REQUEST_INSTALL_PACKAGES\|BuyActivity' "$M"; then echo "gplay manifest still has self-update / buy: $M"; exit 1; fi
+  if grep -n -B2 -A2 'REQUEST_INSTALL_PACKAGES\|QUERY_ALL_PACKAGES\|BuyActivity' "$M"; then echo "gplay manifest still has self-update / buy / all-packages: $M"; exit 1; fi
   mkdir -p /src/out/play && rm -f /src/out/play/*.aab
   cp app/build/outputs/bundle/gplayRelease/*.aab /src/out/play/
   ls -la /src/out/play

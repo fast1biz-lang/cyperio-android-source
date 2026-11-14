@@ -1,5 +1,5 @@
 #!/bin/bash
-# Google Play build:  cyperio-build/build-play.sh   ->  out/play/Cyperio_<ver>-play.aab
+# Google Play build:  cyperio-build/build-play.sh   ->  out/play/Cyperio_<versionName>-<versionCode>-play.aab
 # Flavor "gplay": no self-update, no purchase page (see app/build.gradle.kts). Signed with the Play
 # UPLOAD key $CYPERIO_KEYS/upload.jks (+ upload.env); it is made here on first use. Google re-signs the
 # app with its own app-signing key (Play App Signing). Keep upload.jks + upload.env backed up and out of git:
@@ -17,6 +17,6 @@ if [ ! -f "$KEYS/upload.jks" ]; then
   echo "new upload key: $KEYS/upload.jks (password in upload.env) - back both up"
 fi
 PLAY=1 bash cyperio-build/build.sh "$@"
-VER=$(grep -o 'versionName = "[0-9.]*' V2rayNG/app/build.gradle.kts | cut -d'"' -f2)
+VER=$(grep -o 'versionName = "[0-9.]*' V2rayNG/app/build.gradle.kts | cut -d'"' -f2)-$(grep -A12 'create("gplay")' V2rayNG/app/build.gradle.kts | grep -o 'versionCode = [0-9]*' | grep -o '[0-9]*$')
 for f in out/play/*.aab; do [ "$f" = "out/play/Cyperio_${VER}-play.aab" ] || mv -f "$f" "out/play/Cyperio_${VER}-play.aab"; done
 ls -la out/play
