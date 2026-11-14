@@ -71,7 +71,8 @@ android {
             buildConfigField("boolean", "STORE_BUILD", "true")
             // Play needs a new versionCode for every upload; the APK keeps defaultConfig's.
             // 761: QUERY_ALL_PACKAGES removed (src/gplay/AndroidManifest.xml)
-            versionCode = 761
+            // 762: default routing preset Global instead of Iran (SettingsManager.initRoutingRulesets)
+            versionCode = 762
         }
     }
 

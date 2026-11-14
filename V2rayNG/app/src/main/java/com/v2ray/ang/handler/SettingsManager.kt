@@ -55,8 +55,9 @@ object SettingsManager {
     private fun initRoutingRulesets(context: Context) {
         val exist = MmkvManager.decodeRoutingRulesets()
         if (exist.isNullOrEmpty()) {
-            // Cyperio: default to the Iran preset (Iranian sites and IPs go direct)
-            val rulesetList = getPresetRoutingRulesets(context, 3)
+            // Cyperio: default to the Iran preset (Iranian sites and IPs go direct); the Google Play build is
+            // for people outside Iran, so there everything goes through the tunnel (Global)
+            val rulesetList = getPresetRoutingRulesets(context, if (com.v2ray.ang.BuildConfig.STORE_BUILD) 2 else 3)
             MmkvManager.encodeRoutingRulesets(rulesetList)
         }
     }
